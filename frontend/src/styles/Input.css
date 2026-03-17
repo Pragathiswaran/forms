@@ -1,0 +1,25 @@
+.input-container{
+    display: flex;
+    align-items: center;
+    background: #eaeaea;
+    padding: 6px 20px 6px 6px;
+    width: 400px;
+    border-radius: 6px;
+}
+
+.input-logo{
+    width: 24px;
+    height: 24px;
+    margin: 0 20px;
+    color: #797979;
+}
+
+.input-field{
+    height: 50px;
+    width: 400px;
+    background: transparent;
+    outline: none;
+    border: none;
+    color: #797979;
+    font-size: 20px;
+}
