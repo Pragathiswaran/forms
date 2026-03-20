@@ -1,9 +1,11 @@
 import React from 'react'
-import Input from './components/Input'
+import './styles/App.css'
+import Input from './components/ui/Input'
+import Home from './pages/Home'
 
 const App = () => {
   return (
-    <Input />
+    <Home />
   )
 }
 

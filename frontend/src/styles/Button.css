@@ -1,0 +1,12 @@
+.btn{
+    display: block;
+    border: none;
+    min-width: 100px;
+    width: 100%;
+    background: darkviolet;
+    color: whitesmoke;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 8px 2px;
+    border-radius: 6px;
+}
