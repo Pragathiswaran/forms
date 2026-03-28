@@ -6,19 +6,18 @@
     -webkit-backdrop-filter: blur(5.8px);
     width: 400px;
     padding: 40px;
-    border: 2px solid rgba(86, 86, 88, 0.52);
+    border: 2px solid var(--secondary-grey);
 }
 
 .form-title{
     text-align: center;
     margin-bottom: 24px;
-    /* font: 500 24px; */
 }
 
 .form-title span{
     font-size: 34px ;
     font-weight: 900;
-    color: #797979;
+    color: var(--primary-grey);
 }
 
 .form-inputs-wrapper{
@@ -34,15 +33,15 @@
 
 .form-error{
     display: block;
- margin-top: 6px;
- padding: 0 4px;
- min-height: 20px;
+    margin-top: 6px;
+    padding: 0 4px;
+    min-height: 20px;
 }
 
 .form-error span{
-    color: red;
- font-size: 14px;
- font-weight: 500;
+    color: var(--primary-red);
+    font-size: 14px;
+    font-weight: 600;
 }
 .btn-container{
     display: inline-flex;

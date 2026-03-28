@@ -2,30 +2,21 @@ import { useId } from 'react'
 import './../../styles/signup.css'
 import Input from './../ui/Input'
 import Button from './../ui/Button'
+import { signupForm } from '../../utils'
 import { useForm } from '@tanstack/react-form'
 import { z } from 'zod'
 
 const Signup = () => {
 
     const uniqueId = useId()
-    const signupForm =[ {
-        field: 'Name',
-        type: 'text'
-    }, {
-        field: 'Email',
-        type: 'text'
-    },{
-        field: 'Password',
-        type: 'password'
-    }];
 
     const formSchema = z.object({
-        name: z.string().min(3,"Minimum 3 characters"),
-        email: z.email("Invalid email"),
-        password:z.string().min(8,'The should be minimun 8 characters')
+        name: z.string().min(1,"Please enter the name").min(3,"Minimum 3 characters"),
+        email: z.email("Please enter the valid email address").min(1,"Please enter the email"),
+        password:z.string().min(1,"Please enter the password").min(8,'The should be minimun 8 characters')
     })
 
-    const {Field, handleSubmit, Subscribe} = useForm({
+    const {Field, handleSubmit} = useForm({
         defaultValues:{
             name:"",
             email:"",
@@ -38,7 +29,6 @@ const Signup = () => {
         onSubmit: async ({value, formApi}) => {
             console.log(value)
             formApi.reset()
-        
         },
     })
 
@@ -50,19 +40,19 @@ const Signup = () => {
         <div className="form-inputs-wrapper">
             {signupForm.map((index)=>(
                 <Field name={index.field.toLowerCase()} key={`${uniqueId}-${index.field}`}>
-                  {({ handleChange, handleBlur, state }) => (
-                    <div className='form-inputs'>
-                        <Input
-                            name={index.field} type={index.type}
-                            value={state.value} onBlur={handleBlur}
-                            onChange={(e) => handleChange(e.target.value)}
+                  {({ handleChange, handleBlur, state }) => {
+                    let errorState = state.meta.isTouched && !!state.meta.errors?.length;
+                    return (
+                      <div className='form-inputs'>
+                        <Input logo={index.logo} placeholder={index.field} type={index.type}
+                            value={state.value} onBlur={handleBlur} error={errorState}
+                            onChange={(e) => handleChange(e.target.value)} 
                         />
-                      <div className="form-error">
-                          {state.meta.isTouched && state.meta.errors?.length ? (
-                            <span> {state.meta.errors[0]?.message ?? state.meta.errors[0]} </span>
-                          ) : null}
+                        <div className="form-error">
+                          {errorState && (<span>{state.meta.errors[0]?.message ?? state.meta.errors[0]}</span>)}
+                        </div>
                       </div>
-                    </div>)}
+                    )}}
                 </Field>
             ))}
         </div>

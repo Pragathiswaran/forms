@@ -3,7 +3,7 @@
     border: none;
     min-width: 100px;
     width: 100%;
-    background: #5942FF;
+    background: var(--primary-violet);
     color: whitesmoke;
     font-size: 16px;
     font-weight: 600;

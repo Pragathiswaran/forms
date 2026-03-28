@@ -1,3 +1,10 @@
+:root{
+    --primary-red: #DA4141;
+    --primary-grey: #797979;
+    --primary-violet: #5942FF;
+    --secondary-grey: rgba(86, 86, 88, 0.52)
+}
+
 body{
     margin: 0;
     padding: 0;
@@ -6,4 +13,8 @@ body{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: auto;
+    font-style: normal;
 }

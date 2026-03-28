@@ -1,18 +1,16 @@
 .input-container{
-    display: inline-flex;
+    display: flex;
     align-items: center;
     background: transparent;
     padding: 6px 20px 6px 6px;
     min-width: 250px;
-    border: 1px solid rgba(86, 86, 88, 0.52);
-    border-radius: 6px;
+    border-radius: 12px;
 }
 
 .input-logo{
     width: 20px;
     height: 20px;
     margin: 0 20px;
-    color: #797979;
 }
 
 .input-field{
@@ -22,6 +20,41 @@
     background: transparent;
     outline: none;
     border: none;
-    color: #797979;
+    color: var(--primary-grey);
     font-size: 16px;
+}
+
+/*Default styels*/
+.input-container.default{
+    border: .12rem solid var(--secondary-grey);
+}
+
+.input-container.default .input-logo{
+    color: var(--primary-grey);
+}
+
+/* .input-container.default .input-field::placeholder{
+    color: var(--primary-grey)
+} */
+
+/*Error styles*/
+.input-container.error .input-logo{
+    color: var(--primary-red);
+    animation: shake 0.3s ease-in-out;
+} 
+
+.input-container.error{
+    border:.12rem solid var(--primary-red);
+}
+
+/* .input-container.error .input-field::placeholder{
+    color: var(--primary-red)
+} */
+
+@keyframes shake {
+    0%      { transform: translateX(0); }
+    25%     { transform: translateX(-4px); }
+    50%     { transform: translateX(4px); }
+    75%     { transform: translateX(-4px); }
+    100%    { transform: translateX(0); }
 }
