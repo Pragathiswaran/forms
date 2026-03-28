@@ -8,11 +8,21 @@ import { z } from 'zod'
 const Signup = () => {
 
     const uniqueId = useId()
-    const signupForm =['name', 'email', 'password'];
+    const signupForm =[ {
+        field: 'Name',
+        type: 'text'
+    }, {
+        field: 'Email',
+        type: 'text'
+    },{
+        field: 'Password',
+        type: 'password'
+    }];
 
     const formSchema = z.object({
         name: z.string().min(3,"Minimum 3 characters"),
-        email: z.email()
+        email: z.email("Invalid email"),
+        password:z.string().min(8,'The should be minimun 8 characters')
     })
 
     const {Field, handleSubmit, Subscribe} = useForm({
@@ -21,10 +31,15 @@ const Signup = () => {
             email:"",
             password:""
         },
-        onSubmit: async ({value}) => {
-            console.log(value)
+        validators: {
+            onSubmit: formSchema,
+            onBlur: formSchema
         },
-        validators: {onSubmit: formSchema}
+        onSubmit: async ({value, formApi}) => {
+            console.log(value)
+            formApi.reset()
+        
+        },
     })
 
   return (
@@ -32,21 +47,22 @@ const Signup = () => {
         <div className="form-title">
             <span>Sign up</span>
         </div>
-        <div className="form-inputs">
+        <div className="form-inputs-wrapper">
             {signupForm.map((index)=>(
-                <Field name={index} key={`${uniqueId}-${index}`}>
-                    {({handleChange}) =>(
-                        <>
-                            <Input name={index} onChange={(e) => handleChange(e.target.value)}/>
-                            <Subscribe selector={(state) => state.fieldMeta[index]}>
-                                {(meta) => meta?.isTouched && meta?.errors.length > 0 && (
-                                    <span style={{ color: 'red', fontSize: '12px' }}>
-                                        {meta.errors[0]?.message ?? meta.errors[0]}
-                                    </span>
-                                )}
-                            </Subscribe>
-                        </>
-                    )}
+                <Field name={index.field.toLowerCase()} key={`${uniqueId}-${index.field}`}>
+                  {({ handleChange, handleBlur, state }) => (
+                    <div className='form-inputs'>
+                        <Input
+                            name={index.field} type={index.type}
+                            value={state.value} onBlur={handleBlur}
+                            onChange={(e) => handleChange(e.target.value)}
+                        />
+                      <div className="form-error">
+                          {state.meta.isTouched && state.meta.errors?.length ? (
+                            <span> {state.meta.errors[0]?.message ?? state.meta.errors[0]} </span>
+                          ) : null}
+                      </div>
+                    </div>)}
                 </Field>
             ))}
         </div>

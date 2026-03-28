@@ -1,5 +1,9 @@
 body{
     margin: 0;
     padding: 0;
-    background-color: #212121;
+    background-image: url('./../assets/v1016-b-09.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }

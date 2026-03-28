@@ -1,9 +1,10 @@
 .input-container{
     display: inline-flex;
     align-items: center;
-    background: #eaeaea;
+    background: transparent;
     padding: 6px 20px 6px 6px;
     min-width: 250px;
+    border: 1px solid rgba(86, 86, 88, 0.52);
     border-radius: 6px;
 }
 
