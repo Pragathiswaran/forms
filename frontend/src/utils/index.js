@@ -1,3 +1,3 @@
-import { signupForm } from './forms.jsx'
+import { signupForm, loginForm } from './forms.jsx'
 
-export { signupForm }
+export { signupForm, loginForm }
