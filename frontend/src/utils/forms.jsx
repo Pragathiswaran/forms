@@ -4,26 +4,31 @@ import {faUser, faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons'
 const signupForm =[ {
         field: 'name',
         type: 'text',
-        logo: <FontAwesomeIcon icon={faUser} className='input-logo'/>
+        logo: <FontAwesomeIcon icon={faUser} />
     }, {
         field: 'email',
         type: 'text',
-        logo: <FontAwesomeIcon icon={faEnvelope} className='input-logo'/>
+        logo: <FontAwesomeIcon icon={faEnvelope} />
     },{
         field: 'password',
         type: 'password',
-        logo: <FontAwesomeIcon icon={faLock} className='input-logo'/>
+        logo: <FontAwesomeIcon icon={faLock} />
 }];
 
 const loginForm = [
     {
         field: 'name',
         type: 'text',
-        logo: <FontAwesomeIcon icon={faUser} className='input-logo'/>
+        logo: <FontAwesomeIcon icon={faUser} />
     },{
         field: 'password',
         type: 'password',
-        logo: <FontAwesomeIcon icon={faLock} className='input-logo'/>
+        logo: <FontAwesomeIcon icon={faLock} />
+    },
+    {
+        field: 'checkbox',
+        type: 'checkbox',
+        // logo: <FontAwesomeIcon icon={faLock} />
     }
 ]
 

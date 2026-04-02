@@ -6,8 +6,8 @@ import Form from './../components/forms/Form'
 const Home = () => {
   return (
     <section>
-      {/* <Form formDetails={loginForm} title={'Login'}/> */}
-      <Form formDetails={signupForm} title={'Sign Up'}/>
+      <Form formDetails={loginForm} title={'Login'}/>
+      {/* <Form formDetails={signupForm} title={'Sign Up'}/> */}
     </section>
   )
 }

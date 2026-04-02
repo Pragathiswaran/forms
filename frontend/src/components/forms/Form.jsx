@@ -32,7 +32,7 @@ const Form = ({formDetails, title}) => {
             return acc
         },{}))
 
-    const {Field, handleSubmit} = useForm({
+    const {Field, handleSubmit, Subscribe} = useForm({
         defaultValues:
             formDetails.reduce((acc, fields) => {
             acc[fields.field] = ""
@@ -77,8 +77,16 @@ const Form = ({formDetails, title}) => {
                 </Field>
             ))}
         </div>
-        <div className="btn-container">
-            <Button children="Submit"/>
+        <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
+            {([canSubmit, isSubmitting]) =>(
+                <div className="btn-container" disabled={!canSubmit || isSubmitting}>
+                    <Button>{isSubmitting ? "logging in" : "Submit"}</Button>
+                </div>
+            )}
+        </Subscribe>
+        <div className='form-link'>
+            <span>Already have an account?</span>
+            <a href="http://">Login</a>
         </div>
     </form>
   )

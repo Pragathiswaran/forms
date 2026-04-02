@@ -48,3 +48,12 @@
     width: 100%;
     margin: 24px 0;
 }
+
+.form-link{
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+}
+.form-link span{
+    color: var(--primary-grey);
+}
