@@ -28,7 +28,7 @@ const loginForm = [
     {
         field: 'checkbox',
         type: 'checkbox',
-        // logo: <FontAwesomeIcon icon={faLock} />
+        // logo: <FontAwesomeIcon icon={faLock} /> 
     }
 ]
 
