@@ -10,14 +10,14 @@ const Form = ({formDetails, title}) => {
     const uniqueId = useId()
 
     const Schema = {
-        name:z.string().min(1,"Please enter the name")
+        name:z.string().nonempty("Please enter the name")
             .min(3,"Name should be minimum of 3 characters")
             .max(20, 'Name should be maximum of 20 characters')
             .regex(/^[a-zA-Z0-9]+$/, 'Only alphanumeric characters allowed'),
 
-        email:z.string().min(1,"Please enter the email").email("Please enter the valid email address"),
+        email:z.string().nonempty("Please enter the email").email("Please enter the valid email address"),
 
-        password:z.string().min(1,"Please enter the password")
+        password:z.string().nonempty("Please enter the password")
                 .min(8,'The password should be minimun 8 characters')
                 .max(16,'The password should be maximum 16 characters')
                 .regex(/[A-Z]/, 'Must contain an uppercase letter')
@@ -39,11 +39,19 @@ const Form = ({formDetails, title}) => {
             return acc
         },{}),
         
-        validators: {onSubmit: formSchema },
+        validators: {
+            onSubmit: formSchema,
+            onChange: formSchema, 
+        },
+        
         onSubmit: async ({value, formApi}) => {
             console.log(value)
             formApi.reset()
         },
+
+        onChange : ({value}) => { 
+            console.log(value)
+        }
     })
 
   return (
@@ -53,16 +61,11 @@ const Form = ({formDetails, title}) => {
         </div>
         <div className="form-inputs-wrapper">
             {formDetails.map((item)=>(
-                <Field name={item.field} 
-                    validators={{ 
-                        onChange: formSchema.shape[item.field], 
-                        onBlur: formSchema.shape[item.field]
-                    }} 
-                    key={`${uniqueId}-${item.field}`}
-                >
+                <Field name={item.field} key={`${uniqueId}-${item.field}`}>
                   {(field) => {
-                    let { handleChange, handleBlur, state } = field
-                    let errorState = state.meta.isTouched && !!state.meta.errors?.length;
+                    const { handleChange, handleBlur, state } = field
+                    const errorMessage = state.meta.errors[0]?.message ?? state.meta.errors[0];
+                    const errorState = state.meta.isTouched && !!state.meta.errors?.length;
                     return (
                       <div className='form-inputs'>
                         <Input logo={item.logo} placeholder={item.field} type={item.type}
@@ -70,7 +73,7 @@ const Form = ({formDetails, title}) => {
                             onChange={(e) => handleChange(e.target.value)}
                         />
                         <div className="form-error">
-                          {errorState && (<span>{state.meta.errors[0]?.message ?? state.meta.errors[0]}</span>)}
+                          {errorState && (<span>{errorMessage}</span>)}
                         </div>
                       </div>
                     )}}
