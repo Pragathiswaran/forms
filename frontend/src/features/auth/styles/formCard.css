@@ -25,35 +25,3 @@
     flex-direction: column;
     gap: 14px;
 }
-
-.form-inputs{
-    display: flex;
-    flex-direction: column;
-}
-
-.form-error{
-    display: block;
-    margin-top: 3px;
-    /* padding: 0 4px; */
-    min-height: 20px;
-}
-
-.form-error span{
-    color: var(--primary-red);
-    font-size: 14px;
-    font-weight: 600;
-}
-.btn-container{
-    display: inline-flex;
-    width: 100%;
-    margin: 24px 0;
-}
-
-.form-link{
-    display: flex;
-    justify-content: center;
-    gap: 2px;
-}
-.form-link span{
-    color: var(--primary-grey);
-}

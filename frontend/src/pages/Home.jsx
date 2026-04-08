@@ -1,13 +1,13 @@
 import React from 'react'
 import '../styles/home.css'
-import { signupForm, loginForm } from '../utils'
-import Form from './../components/forms/Form'
+import Signup from '../features/auth/pages/Signup.jsx'
+import Login from '../features/auth/pages/Login.jsx'
 
 const Home = () => {
   return (
     <section>
-      <Form formDetails={loginForm} title={'Login'}/>
-      {/* <Form formDetails={signupForm} title={'Sign Up'}/> */}
+      {/* <Signup /> */}
+      <Login />
     </section>
   )
 }

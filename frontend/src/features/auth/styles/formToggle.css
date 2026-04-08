@@ -1,0 +1,17 @@
+.form-toggle-wrapper{
+    display: flex;
+    align-items: center;
+    gap: 6px
+}
+
+.form-toggle-wrapper span{
+    color: var(--primary-grey);
+}
+
+.form-toggle-wrapper a{
+    color: var(--primary-violet);
+}
+
+.form-toggle-wrapper a:hover{
+    color: color-mix(in srgb, var(--primary-violet) 80%, white);
+}

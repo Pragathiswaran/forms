@@ -1,0 +1,42 @@
+.form-inputs-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.form-inputs{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-error{
+    display: block;
+    margin-top: 3px;
+    /* padding: 0 4px; */
+    min-height: 20px;
+}
+
+.form-error span{
+    color: var(--primary-red);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.form-checkbox-wrapper{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+} 
+
+.btn-container{
+    display: inline-flex;
+    width: 100%;
+    margin: 24px 0;
+}
+
+.form-footer{
+    display: flex;
+    justify-content: center;
+}

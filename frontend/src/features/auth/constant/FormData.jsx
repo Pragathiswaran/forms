@@ -24,12 +24,7 @@ const loginForm = [
         field: 'password',
         type: 'password',
         logo: <FontAwesomeIcon icon={faLock} />
-    },
-    // {
-    //     field: 'checkbox',
-    //     type: 'checkbox',
-    //     // logo: <FontAwesomeIcon icon={faLock} /> 
-    // }
+    }
 ]
 
 export {signupForm, loginForm}
