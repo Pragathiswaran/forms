@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faUser, faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons'
 
-const signupForm =[ {
+const signupFormData =[ {
         field: 'name',
         type: 'text',
         logo: <FontAwesomeIcon icon={faUser} />
@@ -15,7 +15,7 @@ const signupForm =[ {
         logo: <FontAwesomeIcon icon={faLock} />
 }];
 
-const loginForm = [
+const loginFormData = [
     {
         field: 'name',
         type: 'text',
@@ -27,4 +27,4 @@ const loginForm = [
     }
 ]
 
-export {signupForm, loginForm}
+export {signupFormData, loginFormData}

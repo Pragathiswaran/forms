@@ -1,24 +1,26 @@
-import {useId} from 'react'
-import './../styles/signup.css';
-import { signupForm } from './../constant/FormData.jsx'
-import FormCard  from './../components/FormCard.jsx'
+import { useId } from 'react'
+import './../styles/login.css'
+import { loginFormData } from '../constant/FormData.jsx'
+import FormCard  from '../components/FormCard.jsx'
 import { useForm } from '@tanstack/react-form'
-import Input from './../../../components/ui/Input'
+import Input from '../../../components/ui/Input.jsx'
 import Button from '../../../components/ui/Button.jsx';
-import { SignupSchema } from './../schema/FormSchema.js'
+import { LoginSchema } from '../schema/FormSchema.js'
+import FormCheckbox from '../components/formCheckbox.jsx'
+import FormForgetPassword from '../components/FormForgetPassword.jsx'
+import FormToggle from '../components/FormToggle.jsx'
 
-const Signup = () => {
+const LoginForm = () => {
 
-    const uniqueId = useId()
+    const uniqueId = useId
     const { Field, handleSubmit, Subscribe } = useForm({
         defaultValues:{
             name:"",
-            email:"",
             password:""
         },
         validators:{
-            onSubmit: SignupSchema,
-            onChange: SignupSchema
+            onSubmit: LoginSchema,
+            onChange: LoginSchema
         },
         onSubmit: async({value, formApi}) =>{ 
             console.log(value)
@@ -26,9 +28,9 @@ const Signup = () => {
         }
     })
   return (
-    <FormCard handleSubmit={handleSubmit} title={'Sign Up'}>
+    <FormCard handleSubmit={handleSubmit} title={'Log In'}>
        <div className="form-inputs-wrapper">
-         {signupForm.map((item)=>(
+         {loginFormData.map((item)=>(
             <Field name={item.field} key={`${uniqueId}-${item.field}`}>
                 {(field) => {
                     const { handleChange, handleBlur, state } = field
@@ -47,6 +49,10 @@ const Signup = () => {
                 )}}
             </Field>))}
        </div>
+       <div className="form-checkbox-wrapper">
+         <FormCheckbox />
+         <FormForgetPassword />
+       </div>
         <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
         {([canSubmit, isSubmitting]) =>(
             <div className="btn-container" disabled={!canSubmit || isSubmitting}>
@@ -54,8 +60,11 @@ const Signup = () => {
             </div>
         )}
         </Subscribe>
+        <div className="form-footer">
+            <FormToggle mode="login"/>
+        </div>
     </FormCard>
   )
 }
 
-export default Signup
+export default LoginForm
