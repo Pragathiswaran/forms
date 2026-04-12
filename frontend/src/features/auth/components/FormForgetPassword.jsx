@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 const FormForgetPassword = () => {
   return (
    <div className="forget-wrapper">
-    <Link to="/forgetpassword">Forget Password?</Link>
+    <Link to="/auth/login/forgetpass">Forget Password?</Link>
    </div>
   )
 }

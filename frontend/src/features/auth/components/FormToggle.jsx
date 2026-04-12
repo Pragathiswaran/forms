@@ -7,12 +7,12 @@ const FormToggle = ({mode}) => {
   const toggleData = {
     login:{
       text:"Don't have an account?",
-      path:'/signup',
+      path:'/auth/signup',
       link:'Signup'
     },
     signup:{
       text:"Already have an account?",
-      path:'/login',
+      path:'/auth/login',
       link:'Login'
     }
   }
