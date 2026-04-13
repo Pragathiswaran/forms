@@ -8,7 +8,6 @@ import Button from '../../../components/ui/Button.jsx';
 import { SignupSchema } from '../schema/FormSchema.js'
 import FormToggle from '../components/FormToggle.jsx';
 import useSignupForm from '../hooks/useSignupForm.jsx';
-import { email } from 'zod';
 
 const SignupForm = () => {
 
@@ -29,7 +28,7 @@ const SignupForm = () => {
         onSubmit: async({value, formApi}) =>{ 
             console.log(value)
             mutate({
-                username: value.user,
+                username: value.name,
                 email: value.email,
                 password: value.password
             })
