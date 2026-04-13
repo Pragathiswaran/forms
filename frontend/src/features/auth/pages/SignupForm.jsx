@@ -7,10 +7,15 @@ import Input from '../../../components/ui/Input.jsx'
 import Button from '../../../components/ui/Button.jsx';
 import { SignupSchema } from '../schema/FormSchema.js'
 import FormToggle from '../components/FormToggle.jsx';
+import useSignupForm from '../hooks/useSignupForm.jsx';
+import { email } from 'zod';
 
 const SignupForm = () => {
 
     const uniqueId = useId()
+
+    const { mutate } = useSignupForm();
+
     const { Field, handleSubmit, Subscribe } = useForm({
         defaultValues:{
             name:"",
@@ -23,6 +28,11 @@ const SignupForm = () => {
         },
         onSubmit: async({value, formApi}) =>{ 
             console.log(value)
+            mutate({
+                username: value.user,
+                email: value.email,
+                password: value.password
+            })
             formApi.reset()
         }
     })
