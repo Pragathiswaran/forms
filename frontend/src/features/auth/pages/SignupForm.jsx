@@ -17,7 +17,7 @@ const SignupForm = () => {
 
     const { Field, handleSubmit, Subscribe } = useForm({
         defaultValues:{
-            name:"",
+            username:"",
             email:"",
             password:""
         },
@@ -27,11 +27,11 @@ const SignupForm = () => {
         },
         onSubmit: async({value, formApi}) =>{ 
             console.log(value)
-            mutate({
-                username: value.name,
-                email: value.email,
-                password: value.password
-            })
+            // mutate({
+            //     username: value.name,
+            //     email: value.email,
+            //     password: value.password
+            // })
             formApi.reset()
         }
     })
@@ -39,7 +39,19 @@ const SignupForm = () => {
     <FormCard handleSubmit={handleSubmit} title={'Sign Up'}>
        <div className="form-inputs-wrapper">
          {signupFormData.map((item)=>(
-            <Field name={item.field} key={`${uniqueId}-${item.field}`}>
+            <Field name={item.field} key={`${uniqueId}-${item.field}`}
+                validators={
+                    item.hasOnchange && {
+                        onChange : ({value}) => {
+                            if (!value || value.length < 3) return
+                            console.log(value)
+                            if(value === "Praga"){
+                                return "Name is already taken";
+                            }
+                        }
+                    }
+                }
+            >
                 {(field) => {
                     const { handleChange, handleBlur, state } = field
                     const errorMessage = state.meta.errors[0]?.message ?? state.meta.errors[0];
@@ -47,8 +59,28 @@ const SignupForm = () => {
                     return (
                         <div className='form-inputs'>
                         <Input logo={item.logo} placeholder={item.field} type={item.type}
-                            value={state.value} onBlur={handleBlur} error={errorState}
+                            value={state.value} error={errorState}
                             onChange={(e) => handleChange(e.target.value)}
+                            onBlur={async (e) => {
+    handleBlur()
+
+    const value = e.target.value
+
+    if (!value || value.length < 3) return
+
+    // simulate API call
+    await new Promise((res) => setTimeout(res, 500))
+
+    if (value === "Praga") {
+        field.form.setFieldMeta(field.name, {
+            error: "Username already taken",
+        })
+    } else {
+        field.form.setFieldMeta(field.name, {
+            error: undefined,
+        })
+    }
+}}
                         />
                         <div className="form-error">
                             {errorState && (<span>{errorMessage}</span>)}

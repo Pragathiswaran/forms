@@ -18,13 +18,13 @@ const Schema = {
     }
 
 const SignupSchema = z.object({
-    name: Schema.name,
+    username: Schema.name,
     email: Schema.email,
     password: Schema.password
 })
 
 const LoginSchema = z.object({
-    name:Schema.name,
+    username:Schema.name,
     password: Schema.password
 })
 
