@@ -27,12 +27,7 @@ const SignupForm = () => {
             onChange: SignupSchema
         },
         onSubmit: async({value, formApi}) =>{ 
-            console.log(value)
-            // mutate({
-            //     username: value.name,
-            //     email: value.email,
-            //     password: value.password
-            // })
+            mutate(value)
             formApi.reset()
         }
     })
@@ -46,8 +41,7 @@ const SignupForm = () => {
                         ? {
                             onChangeAsyncDebounceMs: 200,
                             onChangeAsync: async ({value, fieldApi}) =>{ 
-                                console.log(value, fieldApi.name)
-                                // return checkAvailability(fieldApi.name, value)
+                                return await checkAvailability(fieldApi.name, value)
                             }
                           }
                         : undefined

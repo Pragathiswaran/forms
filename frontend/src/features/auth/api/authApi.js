@@ -23,11 +23,13 @@ const authApiSignup = ({username, email, password}) => {
 
 const authApiForgetPassword = () => {}
 
-const authApiCheckAvailablity = (field, value) => {
-  return api.get('/auth/signup/check-avail',{
+const authApiCheckAvailablity = async (field, value) => {
+  const response = await api.post('/auth/check-avail',{
       field: field,
       value: value
   })
+
+  return response
 }
 
 export {authApiLogin, authApiSignup, authApiForgetPassword, authApiCheckAvailablity}
