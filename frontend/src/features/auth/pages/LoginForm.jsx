@@ -9,14 +9,19 @@ import { LoginSchema } from '../schema/FormSchema.js'
 import FormCheckbox from '../components/formCheckbox.jsx'
 import FormForgetPassword from '../components/FormForgetPassword.jsx'
 import FormToggle from '../components/FormToggle.jsx'
+import useLoginForm from '../hooks/useLoginForm.jsx'
 
 const LoginForm = () => {
 
-    const uniqueId = useId
+    const uniqueId = useId()
+
+    const {mutate} = useLoginForm()
+
     const { Field, handleSubmit, Subscribe } = useForm({
         defaultValues:{
-            name:"",
-            password:""
+            username:"",
+            password:"",
+            agree: false,
         },
         validators:{
             onSubmit: LoginSchema,
@@ -24,6 +29,10 @@ const LoginForm = () => {
         },
         onSubmit: async({value, formApi}) =>{ 
             console.log(value)
+            mutate({
+                username: value.username,
+                password: value.password
+            })
             formApi.reset()
         }
     })
@@ -50,7 +59,17 @@ const LoginForm = () => {
             </Field>))}
        </div>
        <div className="form-checkbox-wrapper">
-         <FormCheckbox />
+         <Field name="agree">
+            {({handleChange, handleBlur, state})=>{
+                return(
+                    <FormCheckbox 
+                        checked={state.value}
+                        onChange={(e) => handleChange(e.target.checked)}
+                        onBlur={handleBlur}
+                    />
+                )
+            }}
+         </Field>
          <FormForgetPassword />
        </div>
         <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>

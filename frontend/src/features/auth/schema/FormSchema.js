@@ -14,7 +14,8 @@ const Schema = {
                 .regex(/[A-Z]/, 'Must contain an uppercase letter')
                 .regex(/[a-z]/, 'Must contain an lowercase letter')
                 .regex(/[0-9]/, 'Must contain a number')
-                .regex(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]/, 'Must contain a special character')
+                .regex(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]/, 'Must contain a special character'),
+        agree:z.boolean()
     }
 
 const SignupSchema = z.object({
@@ -25,7 +26,8 @@ const SignupSchema = z.object({
 
 const LoginSchema = z.object({
     username:Schema.name,
-    password: Schema.password
+    password: Schema.password,
+    agree:Schema.agree
 })
 
 export { SignupSchema, LoginSchema}
