@@ -8,6 +8,7 @@ import Button from '../../../components/ui/Button.jsx';
 import { SignupSchema } from '../schema/FormSchema.js'
 import FormToggle from '../components/FormToggle.jsx';
 import useSignupForm from '../hooks/useSignupForm.jsx';
+import checkAvailability from '../utils/checkAvailability.js';
 
 const SignupForm = () => {
 
@@ -41,15 +42,15 @@ const SignupForm = () => {
          {signupFormData.map((item)=>(
             <Field name={item.field} key={`${uniqueId}-${item.field}`}
                 validators={
-                    item.hasOnchange && {
-                        onChange : ({value}) => {
-                            if (!value || value.length < 3) return
-                            console.log(value)
-                            if(value === "Praga"){
-                                return "Name is already taken";
+                    item.hasOnchange
+                        ? {
+                            onChangeAsyncDebounceMs: 200,
+                            onChangeAsync: async ({value, fieldApi}) =>{ 
+                                console.log(value, fieldApi.name)
+                                // return checkAvailability(fieldApi.name, value)
                             }
-                        }
-                    }
+                          }
+                        : undefined
                 }
             >
                 {(field) => {
@@ -61,26 +62,7 @@ const SignupForm = () => {
                         <Input logo={item.logo} placeholder={item.field} type={item.type}
                             value={state.value} error={errorState}
                             onChange={(e) => handleChange(e.target.value)}
-                            onBlur={async (e) => {
-    handleBlur()
-
-    const value = e.target.value
-
-    if (!value || value.length < 3) return
-
-    // simulate API call
-    await new Promise((res) => setTimeout(res, 500))
-
-    if (value === "Praga") {
-        field.form.setFieldMeta(field.name, {
-            error: "Username already taken",
-        })
-    } else {
-        field.form.setFieldMeta(field.name, {
-            error: undefined,
-        })
-    }
-}}
+                            onBlur={handleBlur}
                         />
                         <div className="form-error">
                             {errorState && (<span>{errorMessage}</span>)}
