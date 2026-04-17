@@ -5,7 +5,7 @@ import { authApiLogin } from './../api/authApi'
 const useLoginForm = () => {
   const mutation = useMutation({
     mutationFn: ({username, password}) => authApiLogin({username, password}),
-    onSuccess: (value) => { console.log(value) },
+    onSuccess: (value) => { console.log(value?.data?.message, value.status) },
     onError: (err) => { console.log(err) }
   })
 
