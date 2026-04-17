@@ -52,7 +52,7 @@ const loginController = async (req, res) => {
                 message: issue.message
             }))
             return res.status(400).json({error})
-        }
+        } 
 
         const user = await SignupModel.findOne({username})
     
