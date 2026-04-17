@@ -6,11 +6,7 @@ const signupController = async (req, res) => {
     try{
         const {username, email, password} = req.body
 
-        const validateUser = SignupSchema.safeParse({
-            username:username,
-            email: email,
-            password: password
-        })
+        const validateUser = SignupSchema.safeParse(req.body)
 
         if (!validateUser.success){
             const error = validateUser.error?.issues.map(issue =>({
@@ -23,21 +19,21 @@ const signupController = async (req, res) => {
         const userExists = await SignupModel.findOne({username})
 
         if(userExists){
-            return res.status(400).json({"message": "User is already exist"})
+            return res.status(409).json({"message": "User is already exist"})
         }
 
-        const hasedPassword = await hashPassword(password)
-        if(!hasedPassword){
-            console.log("after", hasedPassword)
+        const hashedPassword = await hashPassword(password)
+        if(!hashedPassword){
+            console.log("after", hashedPassword)
             return res.status(400).json({"message": "Something went wrong during encrypting the password"})
         }
 
-        const creatUser = await SignupModel.create({ username, email, password: hasedPassword})
-        if(!creatUser){
-            res.status(400).json({"message":"Something went wrong while creating the user"})
+        const createdUser = await SignupModel.create({ username, email, password: hashedPassword})
+        if(!createdUser){
+            return res.status(400).json({"message":"Something went wrong while creating the user"})
         }
 
-        return res.status(200).json({"message": "The user has been registered successfully"})
+        return res.status(201).json({"message": "The user has been registered successfully"})
     } catch (err) {
         console.log("Error :", err)
         return res.status(500).json({ message: "Server error" });
@@ -48,10 +44,7 @@ const loginController = async (req, res) => {
     try{
         const { username, password } = req.body
 
-        const loginValidator = LoginSchema.safeParse({
-            username: username, 
-            password: password
-        })
+        const loginValidator = LoginSchema.safeParse(req.body)
 
         if(!loginValidator.success){
             const error = loginValidator.error?.issues.map(issue =>({
@@ -64,13 +57,13 @@ const loginController = async (req, res) => {
         const user = await SignupModel.findOne({username})
     
         if(!user){
-            return res.status(400).json({"message": "User is not exist"})
+            return res.status(404).json({"message": "Incorrect username or password"})
         }
 
         const comparedPassword = await comparePassword(password, user.password)
 
         if(!comparedPassword){
-            return res.status(400).json({"message": "Incorrect Password"})
+            return res.status(401).json({"message": "Incorrect username or password"})
         }
 
         return res.status(200).json({"message": "User login successfully"})

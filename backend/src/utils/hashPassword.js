@@ -1,17 +1,25 @@
 import bcrypt from 'bcrypt'
 
-const hashPassword = (password) => {
-    const salt = 10
-    const hased  = bcrypt.hash(password, salt)
+const hashPassword = async (password) => {
+    try{
+        const salt = 10
+        const hasedPassword  = await bcrypt.hash(password, salt)
 
-    console.log("hased", hased)
-    return hased 
+        console.log("Encrypted the password")
+        return hasedPassword 
+    }catch(err){
+        console.log(err)
+        throw err
+    }
 }
 
-const comparePassword = (pass, hashPass) => {
-    const comparePass = bcrypt.compare(pass, hashPass);
-    console.log("comparePass", comparePass)
-    return comparePass
+const comparePassword = async (pass, hashPass) => {
+    try{
+        return await bcrypt.compare(pass, hashPass);
+    } catch (err) {
+        console.log(err)
+        throw err
+    }
 }
 
 export { hashPassword, comparePassword }
