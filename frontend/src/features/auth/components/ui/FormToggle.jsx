@@ -1,9 +1,9 @@
 import React from 'react'
-import './../styles/formToggle.css'
+import './../../styles/formToggle.css'
 import { Link } from 'react-router-dom'
 
 const FormToggle = ({mode}) => {
-
+ 
   const toggleData = {
     login:{
       text:"Don't have an account?",

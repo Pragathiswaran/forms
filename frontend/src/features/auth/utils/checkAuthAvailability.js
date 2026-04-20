@@ -1,7 +1,7 @@
 import { authApiCheckAvailablity } from '../api/authApi.js'
-import {toFirstUpperCase} from './../../../utils/helper.js'
+import {toFirstUpperCase} from '../../../utils/helper.js'
 
-const checkAvailability = async (field, value) => {
+const checkAuthAvailability = async (field, value) => {
     const response = await authApiCheckAvailablity(field, value)
     if(response.status === 200 && response.data?.availability === false){
         return `${toFirstUpperCase(field)} is already taken`
@@ -9,4 +9,4 @@ const checkAvailability = async (field, value) => {
     return
 }
 
-export default checkAvailability
+export default checkAuthAvailability

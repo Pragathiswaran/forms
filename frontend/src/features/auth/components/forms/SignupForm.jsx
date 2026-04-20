@@ -1,14 +1,14 @@
 import {useId} from 'react'
-import './../styles/signup.css';
-import { signupFormData } from '../constant/FormData.jsx'
-import FormCard  from '../components/FormCard.jsx'
+import './../../styles/signup.css';
+import { signupFormData } from './../../constant/FormData.jsx'
+import FormCard  from '../ui/FormCard.jsx'
 import { useForm } from '@tanstack/react-form'
-import Input from '../../../components/ui/Input.jsx'
-import Button from '../../../components/ui/Button.jsx';
-import { SignupSchema } from '../schema/FormSchema.js'
-import FormToggle from '../components/FormToggle.jsx';
-import useSignupForm from '../hooks/useSignupForm.jsx';
-import checkAvailability from '../utils/checkAvailability.js';
+import Input from '../../../../components/ui/Input.jsx'
+import Button from '../../../../components/ui/Button.jsx';
+import { SignupSchema } from '../../schema/FormSchema.js'
+import FormToggle from '../ui/FormToggle.jsx';
+import useSignupForm from '../../hooks/useSignupForm.jsx';
+import checkAuthAvailability from '../../utils/checkAuthAvailability.js';
 
 const SignupForm = () => {
 
@@ -41,7 +41,7 @@ const SignupForm = () => {
                         ? {
                             onChangeAsyncDebounceMs: 200,
                             onChangeAsync: async ({value, fieldApi}) =>{ 
-                                return await checkAvailability(fieldApi.name, value)
+                                return await checkAuthAvailability(fieldApi.name, value)
                             }
                           }
                         : undefined

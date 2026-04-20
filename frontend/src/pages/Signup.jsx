@@ -1,5 +1,5 @@
 import React from 'react'
-import SignupForm from '../features/auth/pages/SignupForm'
+import SignupForm from '../features/auth/components/forms/SignupForm'
 import './../styles/home.css'
 
 const Signup = () => {

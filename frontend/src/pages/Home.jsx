@@ -1,7 +1,7 @@
 import React from 'react'
 import './../styles/home.css'
-import Signup from '../features/auth/pages/SignupForm.jsx'
-import Login from '../features/auth/pages/LoginForm.jsx'
+// import Signup from '../features/auth/pages/SignupForm.jsx'
+// import Login from '../features/auth/pages/LoginForm.jsx'
 
 const Home = () => {
   return (

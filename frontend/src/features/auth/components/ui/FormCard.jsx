@@ -1,5 +1,5 @@
 import React from 'react'
-import './../styles/formCard.css'
+import './../../styles/formCard.css'
 
 const FormCard = ({children, handleSubmit, title}) => {
   return (
