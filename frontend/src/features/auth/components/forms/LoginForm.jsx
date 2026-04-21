@@ -7,7 +7,7 @@ import Input from '../../../../components/ui/Input.jsx'
 import Button from '../../../../components/ui/Button.jsx';
 import { LoginSchema } from '../../schema/FormSchema.js'
 import FormCheckbox from '../ui/FormCheckbox.jsx'
-import FormForgetPassword from '../ui/FormForgetPassword.jsx'
+// import FormForgetPassword from '../ui/FormForgetPassword.jsx'
 import FormToggle from '../ui/FormToggle.jsx'
 import useLoginForm from '../../hooks/useLoginForm.jsx'
 
@@ -92,7 +92,7 @@ const LoginForm = () => {
                 )
             }}
          </Field>
-          <FormForgetPassword />
+          <FormToggle mode="forgetPassword" flag="false"/>
         </div>
         <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
         {([canSubmit, isSubmitting]) =>(

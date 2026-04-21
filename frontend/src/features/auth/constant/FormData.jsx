@@ -30,4 +30,11 @@ const loginFormData = [
     }
 ]
 
-export {signupFormData, loginFormData}
+const forgetPasswordFormData = {
+    field: 'email',
+    type: 'text',
+    logo: <FontAwesomeIcon icon={faEnvelope} />,
+    hasOnchange: true
+}
+
+export {signupFormData, loginFormData, forgetPasswordFormData}

@@ -1,4 +1,4 @@
-import { email, z } from "zod"
+import { z } from "zod"
 
 const Schema = {
         name:z.string().nonempty("Please enter the name")
@@ -30,4 +30,8 @@ const LoginSchema = z.object({
     agree:Schema.agree
 })
 
-export { SignupSchema, LoginSchema}
+const ForgetPasswordSchema = z.object({
+    email : Schema.email,
+})
+
+export { SignupSchema, LoginSchema, ForgetPasswordSchema}

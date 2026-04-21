@@ -1,8 +1,12 @@
 import React from 'react'
+import './../styles/home.css'
+import ForgetPasswordForm from '../features/auth/components/forms/ForgetPasswordForm'
 
 const ForgetPassword = () => {
   return (
-    <div style={{color: 'white'}}>ForgetPassword</div>
+    <section>
+      <ForgetPasswordForm />
+    </section>
   )
 }
 
