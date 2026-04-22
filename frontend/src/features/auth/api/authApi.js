@@ -23,7 +23,10 @@ const authApiSignup = async ({username, email, password}) => {
   return response
 }
 
-const authApiForgetPassword = () => {}
+const authApiForgetPassword = async (email) => {
+  const response = await api.post('/auth/login/forgetpass', {email: email})
+  return response
+}
 
 const authApiCheckAvailablity = async (field, value) => {
   const response = await api.post('/auth/check-avail',{
