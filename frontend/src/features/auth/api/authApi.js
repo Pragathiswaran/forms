@@ -24,7 +24,7 @@ const authApiSignup = async ({username, email, password}) => {
 }
 
 const authApiForgetPassword = async (email) => {
-  const response = await api.post('/auth/login/forgetpass', {email: email})
+  const response = await api.post('/auth/login/forgetpass', email)
   return response
 }
 
