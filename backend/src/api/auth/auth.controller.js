@@ -1,4 +1,4 @@
-import { SignupSchema, LoginSchema } from './auth.validator.js'
+import { SignupSchema, LoginSchema, forgetPasswordSchema } from './auth.validator.js'
 import { SignupModel } from '../../models/auth.model.js'
 import { hashPassword, comparePassword } from '../../utils/hashPassword.js'
 
@@ -98,4 +98,34 @@ const checkAvailController = async (req, res) => {
     }
 };
 
-export { signupController, checkAvailController, loginController }
+const forgetPasswordController = async (req, res) =>{
+    try{
+        const { email } = req.body
+
+        const emailValidator = forgetPasswordSchema.safeParse({email})
+
+        if(!emailValidator.success){
+            console.log('email is invalid')
+            const error = emailValidator.error?.issues.map(issue =>({
+                field: issue.path[0],
+                message: issue.message
+            }))
+            console.log(error)
+            return res.status(400).json({error})
+        }
+
+        const isEmailExists = await SignupModel.exists({['email']: email})
+
+        if(!isEmailExists){
+            return res.status(404).json({'message': 'The give email is invalid'})
+        }
+
+        return res.status(200).json({'message':'Otp is send to the given email'})
+
+    } catch (err){
+        console.log(err)
+        return res.status(500).json({'message':'server error'})
+    }
+}
+
+export { signupController, checkAvailController, loginController, forgetPasswordController }

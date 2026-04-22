@@ -28,4 +28,8 @@ const LoginSchema = z.object({
     password: Schema.password
 })
 
-export { SignupSchema, LoginSchema }
+const forgetPasswordSchema = z.object({
+    email: Schema.email
+})
+
+export { SignupSchema, LoginSchema, forgetPasswordSchema }
