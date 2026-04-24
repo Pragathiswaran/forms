@@ -1,6 +1,8 @@
 import { SignupSchema, LoginSchema, forgetPasswordSchema } from './auth.validator.js'
 import { SignupModel } from '../../models/auth.model.js'
 import { hashPassword, comparePassword } from '../../utils/hashPassword.js'
+import sendEmail from '../../services/email/sendEmail.js'
+import { generateOTP, verifyOtp } from '../../utils/generateOtp.js'
 
 const signupController = async (req, res) => {
     try{
@@ -114,10 +116,18 @@ const forgetPasswordController = async (req, res) =>{
             return res.status(400).json({error})
         }
 
-        const isEmailExists = await SignupModel.exists({['email']: email})
-
+        const isEmailExists = await SignupModel.findOne({'email': email})
+        
         if(!isEmailExists){
             return res.status(404).json({'message': 'The give email is invalid'})
+        }
+
+        const otp = await generateOTP()
+
+        const sendOtp = await sendEmail(isEmailExists.email,otp)
+        console.log('send OTP', sendOtp.response)
+        if(!sendOtp.response){
+            return res.status(401).json({"meesage": "Something went wrong while sending otp"})
         }
 
         return res.status(200).json({'message':'Otp is send to the given email'})
@@ -126,6 +136,19 @@ const forgetPasswordController = async (req, res) =>{
         console.log(err)
         return res.status(500).json({'message':'server error'})
     }
+}
+
+export const verificationController = async (req, res) => {
+    const { otp } = req.body
+
+    console.log(otp)
+    const verify = await verifyOtp(otp)
+    console.log(verify)
+    if(!verify.valid){
+        return res.status(401).json({"message" : "Invalid OTP"})
+    }
+
+    return res.status(200).json({"message":"success"})
 }
 
 export { signupController, checkAvailController, loginController, forgetPasswordController }
