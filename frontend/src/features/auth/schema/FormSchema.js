@@ -15,7 +15,8 @@ const Schema = {
                 .regex(/[a-z]/, 'Must contain an lowercase letter')
                 .regex(/[0-9]/, 'Must contain a number')
                 .regex(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]/, 'Must contain a special character'),
-        agree:z.boolean()
+        agree:z.boolean(),
+        otp: z.string().nonempty("Please enter the OTP").regex(/^\d+$/,"The OTP must be the number").max(4,"The OTP must be 4 digits")
     }
 
 const SignupSchema = z.object({
@@ -34,4 +35,7 @@ const ForgetPasswordSchema = z.object({
     email : Schema.email,
 })
 
-export { SignupSchema, LoginSchema, ForgetPasswordSchema}
+const verificationSchema = z.object({
+    otp : Schema.otp
+})
+export { SignupSchema, LoginSchema, ForgetPasswordSchema, verificationSchema}

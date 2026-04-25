@@ -46,16 +46,16 @@ const ForgetPasswordForm = () => {
                 />
                 <div className="form-error">{errorState && (<span>{errorMessage}</span>)}</div>
               </div>
-              <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
-                {([canSubmit, isSubmitting]) =>(
-                  <div className="form-btn-container" disabled={!canSubmit || isSubmitting}>
-                    <Button>{isSubmitting ? "logging in" : "Submit"}</Button>
-                  </div>
-                )}
-              </Subscribe>
             </>
         )}}
       </Field>
+      <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
+        {([canSubmit, isSubmitting]) =>(
+          <div className="form-btn-container" disabled={!canSubmit || isSubmitting}>
+            <Button>{isSubmitting ? "logging in" : "Submit"}</Button>
+          </div>
+        )}
+      </Subscribe>
     </FormCard>
   )
 }
