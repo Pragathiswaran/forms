@@ -144,7 +144,7 @@ export const verificationController = async (req, res) => {
     console.log(otp)
     const verify = await verifyOtp(otp)
     console.log(verify)
-    if(!verify.valid){
+    if(!verify){
         return res.status(401).json({"message" : "Invalid OTP"})
     }
 

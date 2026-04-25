@@ -4,12 +4,12 @@ import 'dotenv/config'
 import route from './api/auth/auth.route.js'
 import connectDB from './models/db.model.js'
 import emailServer from './services/email/emailServer.js'
+import { generateOTP, verifyOtp } from './utils/generateOtp.js'
 
 const app = express()
 
 app.use(cors())
 app.use(express.json())
-// dotenv.config()
 connectDB()
 app.use('/', route)
 
@@ -19,4 +19,4 @@ emailServer.verify()
 
 app.get('/',(req, res) => { res.send("Hello world!!!") })
 
-export default app
+export default app 
