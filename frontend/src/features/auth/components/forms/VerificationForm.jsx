@@ -4,19 +4,16 @@ import Input from '../../../../components/ui/Input'
 import Button from '../../../../components/ui/Button'
 import { useForm } from '@tanstack/react-form'
 import { verificationSchema } from './../../schema/FormSchema'
+import FormOtpInput from '../ui/FormOtpInput'
 
 const VerificationForm = () => {
 
     const { Field, handleSubmit, Subscribe } = useForm({
         defaultValues :{
-            otp:""
-        },
-        validators:{
-            onSubmit: verificationSchema,
-            onChange: verificationSchema
+            otp: new Array(4).fill("")
         },
         onSubmit: async ({value, formApi}) => {
-            console.log(value)
+            console.log(value.otp.join(''))
             formApi.reset()
         }
     })
@@ -29,23 +26,18 @@ const VerificationForm = () => {
           const errorState = state.meta.isTouched && !!state.meta.errors?.length;
           return(
             <>
-              <div className='form-inputs'>
-                <Input placeholder={"Enter the otp...."} type={'text'}
-                  value={state.value} onBlur={handleBlur} error={errorState}
-                  onChange={(e) => handleChange(e.target.value)}
+              <div style={{display: 'flex', justifyContent:'space-around'}}>
+                <FormOtpInput
+                  length={4}
+                  value={state.value}
+                  onChange={handleChange}
+                  onSubmit={handleSubmit}
                 />
-                <div className="form-error">{errorState && (<span>{errorMessage}</span>)}</div>
+                {/* <div className="form-error">{errorState && (<span>{errorMessage}</span>)}</div> */}
               </div>
             </>
         )}}
       </Field>
-      <Subscribe selector={(state) => [state.canSubmit, state.isSubmitting]}>
-        {([canSubmit, isSubmitting]) =>(
-          <div className="form-btn-container" disabled={!canSubmit || isSubmitting}>
-            <Button>{isSubmitting ? "logging in" : "Submit"}</Button>
-          </div>
-        )}
-      </Subscribe>
     </FormCard>
   )
 }
