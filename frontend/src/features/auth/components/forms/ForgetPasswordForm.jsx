@@ -7,9 +7,11 @@ import {useForm} from '@tanstack/react-form'
 import { forgetPasswordFormData as data} from './../../constant/FormData'
 import { ForgetPasswordSchema as formSchema } from './../../schema/FormSchema'
 import useForgetPasswordForm from '../../hooks/useForgetPasswordForm'
+import { useNavigate } from "react-router-dom"
 
 const ForgetPasswordForm = () => {
 
+  const navigate = useNavigate()
   const { mutateAsync } = useForgetPasswordForm()
   const { Field, handleSubmit, Subscribe } = useForm({
     defaultValues:{ email:'' },
@@ -20,6 +22,7 @@ const ForgetPasswordForm = () => {
           try{
             const res = await mutateAsync({email:value.email})
             console.log('success',res)
+            navigate('/auth/verification')
             return res
           } catch(err){
             console.log('Error', err)

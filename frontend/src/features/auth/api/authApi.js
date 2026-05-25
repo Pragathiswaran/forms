@@ -36,4 +36,11 @@ const authApiCheckAvailablity = async (field, value) => {
   return response
 }
 
-export {authApiLogin, authApiSignup, authApiForgetPassword, authApiCheckAvailablity}
+const authVerification = async (otp) => {
+  const response = await api.post('/auth/login/verify',{
+    otp: otp
+  })
+  return response
+}
+
+export {authApiLogin, authApiSignup, authApiForgetPassword, authApiCheckAvailablity, authVerification}
